@@ -26,11 +26,6 @@
       "image": "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=600&q=80"
     },
     {
-      "title": "Glass Replacement",
-      "desc": "Windshield and window replacement with OEM-quality glass.",
-      "image": "https://images.unsplash.com/photo-1489824904134-891ab64532f1?w=600&q=80"
-    },
-    {
       "title": "Custom Work",
       "desc": "Custom modifications, body kits, and specialty finishes.",
       "image": "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=600&q=80"
@@ -49,10 +44,10 @@
   ],
 
   "contact": {
-    "phone": "+1234567890",
-    "email": "info@easybodywork.com",
-    "address": "123 Auto Lane, Motor City, MC 12345",
-    "whatsapp": "1234567890",
-    "map": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.2412648750455!2d-73.98784368459418!3d40.74844097932847!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259a9b3117469%3A0xd134e199a405a163!2sEmpire%20State%20Building!5e0!3m2!1sen!2sus!4v1629794729807!5m2!1sen!2sus"
+    "phone": "+44 7878863945",
+    "email": "admin@easybodywork.co.uk",
+    "address": "EASY BODY WORK LTD, Middlesex Business Center,Unit E4,Bridge Road,Southall,Middlesex,United Kingdom,UB24aB",
+    "whatsapp": "+447878863945",
+    "map": "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d2483.4452569476043!2d-0.3769475233800505!3d51.505046771812864!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2s!5e0!3m2!1sen!2sin!4v1765214917816!5m2!1sen!2sin"
   }
 }

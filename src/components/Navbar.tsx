@@ -33,11 +33,18 @@ const Navbar = ({ siteName }: NavbarProps) => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <a href="#home" className="flex items-center gap-2">
-            <span className="font-display text-3xl text-primary tracking-wider">
-              {siteName}
-            </span>
-          </a>
+<a href="#home" className="flex items-center gap-3">
+<img
+  src="https://res.cloudinary.com/dzytbf1kw/image/upload/v1765215323/IMG_8206_ahzvrs.jpg"
+  alt="EasyBodyWork Logo"
+  className="h-10 w-10 object-contain 
+             transition-transform duration-300 ease-out 
+             hover:scale-125 hover:z-50"
+/>
+  <span className="font-display text-3xl text-primary tracking-wider">
+    {siteName}
+  </span>
+</a>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
