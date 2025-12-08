@@ -1,0 +1,58 @@
+{
+  "siteName": "EasyBodyWork",
+  "heroImage": "https://images.unsplash.com/photo-1625047509248-ec889cbff17f?w=1920&q=80",
+  "heroTitle": "Professional Auto Body Repair",
+  "heroSubtitle": "Quality craftsmanship, fast turnaround, and competitive prices. Your car deserves the best care.",
+
+  "services": [
+    {
+      "title": "Collision Repair",
+      "desc": "Expert collision repair services to restore your vehicle to pre-accident condition.",
+      "image": "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=600&q=80"
+    },
+    {
+      "title": "Paint Services",
+      "desc": "Premium paint matching and full body painting with factory-quality finish.",
+      "image": "https://images.unsplash.com/photo-1603386329225-868f9b1ee6c9?w=600&q=80"
+    },
+    {
+      "title": "Dent Removal",
+      "desc": "Paintless dent repair and traditional dent removal for all sizes.",
+      "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=600&q=80"
+    },
+    {
+      "title": "Frame Straightening",
+      "desc": "Precision frame alignment using state-of-the-art equipment.",
+      "image": "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=600&q=80"
+    },
+    {
+      "title": "Glass Replacement",
+      "desc": "Windshield and window replacement with OEM-quality glass.",
+      "image": "https://images.unsplash.com/photo-1489824904134-891ab64532f1?w=600&q=80"
+    },
+    {
+      "title": "Custom Work",
+      "desc": "Custom modifications, body kits, and specialty finishes.",
+      "image": "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=600&q=80"
+    }
+  ],
+
+  "gallery": [
+    "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=600&q=80",
+    "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600&q=80",
+    "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=600&q=80",
+    "https://images.unsplash.com/photo-1525609004556-c46c7d6cf023?w=600&q=80",
+    "https://images.unsplash.com/photo-1542362567-b07e54358753?w=600&q=80",
+    "https://images.unsplash.com/photo-1553440569-bcc63803a83d?w=600&q=80",
+    "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=600&q=80",
+    "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=600&q=80"
+  ],
+
+  "contact": {
+    "phone": "+1234567890",
+    "email": "info@easybodywork.com",
+    "address": "123 Auto Lane, Motor City, MC 12345",
+    "whatsapp": "1234567890",
+    "map": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.2412648750455!2d-73.98784368459418!3d40.74844097932847!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259a9b3117469%3A0xd134e199a405a163!2sEmpire%20State%20Building!5e0!3m2!1sen!2sus!4v1629794729807!5m2!1sen!2sus"
+  }
+}
