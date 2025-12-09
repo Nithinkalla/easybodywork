@@ -1,5 +1,6 @@
 import { Service } from '@/types/content';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
+import { cacheImageUrl } from '@/utils/cacheImageUrl';
 
 interface ServicesProps {
   services: Service[];
@@ -42,7 +43,7 @@ const Services = ({ services }: ServicesProps) => {
         {/* Image */}
         <div className="relative h-48 overflow-hidden">
           <img
-            src={service.image}
+            src={cacheImageUrl(service.image)}
             alt={service.title}
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
           />

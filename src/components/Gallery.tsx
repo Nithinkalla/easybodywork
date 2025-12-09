@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import { X } from 'lucide-react';
+import { cacheImageUrl } from '@/utils/cacheImageUrl';
 
 interface GalleryProps {
   images: string[];
@@ -34,7 +35,7 @@ const Gallery = ({ images }: GalleryProps) => {
             >
               <div className="relative aspect-square overflow-hidden rounded-lg shadow-md card-hover group">
                 <img
-                  src={image}
+                  src={cacheImageUrl(image)}
                   alt={`Gallery image ${index + 1}`}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
