@@ -13,9 +13,14 @@ const Index = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch('/content.json')
+    fetch(
+      "https://raw.githubusercontent.com/Nithinkalla/easybodywork-content/refs/heads/main/content.json",
+      {
+        cache: "no-cache", // always fetch latest version
+      }
+    )
       .then((res) => {
-        if (!res.ok) throw new Error('Failed to load content');
+        if (!res.ok) throw new Error("Failed to load content.json");
         return res.json();
       })
       .then((data) => setContent(data))
