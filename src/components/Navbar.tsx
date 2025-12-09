@@ -26,28 +26,29 @@ const Navbar = ({ siteName }: NavbarProps) => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'nav-dark shadow-lg' : 'bg-transparent'
-      }`}
+      className={`fixed top-0 left-0 right-0 w-full overflow-hidden z-50 transition-all duration-300
+        ${isScrolled ? 'nav-dark shadow-lg' : 'bg-transparent'}
+      `}
     >
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 sm:px-6 md:px-8">
         <div className="flex items-center justify-between h-20">
+
           {/* Logo */}
-<a href="#home" className="flex items-center gap-3">
-<img
-  src="https://res.cloudinary.com/dzytbf1kw/image/upload/v1765215323/IMG_8206_ahzvrs.jpg"
-  alt="EasyBodyWork Logo"
-  className="h-10 w-10 object-contain 
-             transition-transform duration-300 ease-out 
-             hover:scale-125 hover:z-50"
-/>
-  <span className="font-display text-3xl text-primary tracking-wider">
-    {siteName}
-  </span>
-</a>
+          <a href="#home" className="flex items-center gap-2">
+            <img
+              src="https://res.cloudinary.com/dzytbf1kw/image/upload/v1765215323/IMG_8206_ahzvrs.jpg"
+              alt="EasyBodyWork Logo"
+              className="h-8 w-8 sm:h-10 sm:w-10 object-contain 
+                        transition-transform duration-300 ease-out 
+                        hover:scale-125 hover:z-50"
+            />
+            <span className="font-display text-xl sm:text-3xl text-primary tracking-wider whitespace-nowrap">
+              {siteName}
+            </span>
+          </a>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-6 whitespace-nowrap">
             {navLinks.map((link) => (
               <a
                 key={link.href}
@@ -66,21 +67,29 @@ const Navbar = ({ siteName }: NavbarProps) => {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden p-2"
+            className="md:hidden p-2 w-12 h-12 flex items-center justify-center"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
           >
             {isMobileMenuOpen ? (
-              <X className={isScrolled ? 'text-secondary-foreground' : 'text-secondary'} size={28} />
+              <X
+                className={isScrolled ? 'text-secondary-foreground' : 'text-secondary'}
+                size={28}
+              />
             ) : (
-              <Menu className={isScrolled ? 'text-secondary-foreground' : 'text-secondary'} size={28} />
+              <Menu
+                className={isScrolled ? 'text-secondary-foreground' : 'text-secondary'}
+                size={28}
+              />
             )}
           </button>
         </div>
 
         {/* Mobile Navigation */}
         {isMobileMenuOpen && (
-          <div className="md:hidden nav-dark rounded-lg mb-4 p-4 animate-fade-in visible">
+          <div
+            className="md:hidden w-full px-4 nav-dark rounded-lg mb-4 p-4 animate-fade-in overflow-hidden"
+          >
             {navLinks.map((link) => (
               <a
                 key={link.href}

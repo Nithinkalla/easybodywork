@@ -14,6 +14,7 @@ const Gallery = ({ images }: GalleryProps) => {
   return (
     <section id="gallery" className="py-20 bg-muted" ref={containerRef}>
       <div className="container mx-auto px-4">
+
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="section-title mb-4 animate-reveal">
@@ -25,7 +26,15 @@ const Gallery = ({ images }: GalleryProps) => {
         </div>
 
         {/* Gallery Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="
+  grid 
+  grid-cols-2 
+  sm:grid-cols-2 
+  md:grid-cols-3 
+  lg:grid-cols-4 
+  gap-3 
+  px-2
+">
           {images.map((image, index) => (
             <div
               key={index}
@@ -34,11 +43,15 @@ const Gallery = ({ images }: GalleryProps) => {
               onClick={() => setSelectedImage(image)}
             >
               <div className="relative aspect-square overflow-hidden rounded-lg shadow-md card-hover group">
+                
+                {/* Thumbnail Image */}
                 <img
                   src={cacheImageUrl(image)}
                   alt={`Gallery image ${index + 1}`}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
+
+                {/* Hover Overlay */}
                 <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/20 transition-colors duration-300 flex items-center justify-center">
                   <span className="text-secondary-foreground font-display text-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-shadow">
                     View
@@ -53,9 +66,10 @@ const Gallery = ({ images }: GalleryProps) => {
       {/* Lightbox */}
       {selectedImage && (
         <div
-          className="fixed inset-0 z-50 bg-secondary/95 flex items-center justify-center p-4"
+          className="fixed inset-0 z-50 bg-secondary/95 flex items-center justify-center p-4 animate-reveal"
           onClick={() => setSelectedImage(null)}
         >
+          {/* Close Button */}
           <button
             className="absolute top-4 right-4 text-secondary-foreground hover:text-primary transition-colors"
             onClick={() => setSelectedImage(null)}
@@ -63,8 +77,10 @@ const Gallery = ({ images }: GalleryProps) => {
           >
             <X size={32} />
           </button>
+
+          {/* Large Preview Image */}
           <img
-            src={selectedImage}
+            src={cacheImageUrl(selectedImage)}
             alt="Gallery preview"
             className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl"
             onClick={(e) => e.stopPropagation()}

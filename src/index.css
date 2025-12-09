@@ -281,3 +281,17 @@
     font-family: var(--font-body);
   }
 }
+html, body {
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+html, body {
+  overflow-x: hidden !important;
+}
