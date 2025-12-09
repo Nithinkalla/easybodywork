@@ -11,6 +11,16 @@ const Gallery = ({ images }: GalleryProps) => {
   const containerRef = useScrollReveal();
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
+  const openModal = (img: string) => {
+    setSelectedImage(img);
+    document.body.style.overflow = 'hidden'; // freeze scroll visually
+  };
+
+  const closeModal = () => {
+    setSelectedImage(null);
+    document.body.style.overflow = 'auto'; // restore scroll
+  };
+
   return (
     <section id="gallery" className="py-20 bg-muted" ref={containerRef}>
       <div className="container mx-auto px-4">
@@ -26,63 +36,78 @@ const Gallery = ({ images }: GalleryProps) => {
         </div>
 
         {/* Gallery Grid */}
-        <div className="
-  grid 
-  grid-cols-2 
-  sm:grid-cols-2 
-  md:grid-cols-3 
-  lg:grid-cols-4 
-  gap-3 
-  px-2
-">
+        <div
+          className="
+            grid 
+            grid-cols-2 
+            sm:grid-cols-2 
+            md:grid-cols-3 
+            lg:grid-cols-4 
+            gap-3 
+            px-2
+          "
+        >
           {images.map((image, index) => (
             <div
               key={index}
               className="animate-reveal cursor-pointer"
               style={{ transitionDelay: `${index * 0.05}s` }}
-              onClick={() => setSelectedImage(image)}
+              onClick={() => openModal(image)}
             >
-              <div className="relative aspect-square overflow-hidden rounded-lg shadow-md card-hover group">
-                
+              <div
+                className="
+                  relative aspect-square overflow-hidden rounded-lg shadow-md
+                  group transition-transform duration-500 hover:scale-[1.05]
+                "
+              >
                 {/* Thumbnail Image */}
                 <img
                   src={cacheImageUrl(image)}
                   alt={`Gallery image ${index + 1}`}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  className="
+                    w-full h-full object-cover 
+                    transition-transform duration-500 group-hover:scale-110
+                  "
                 />
-
-                {/* Hover Overlay */}
-                <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/20 transition-colors duration-300 flex items-center justify-center">
-                  <span className="text-secondary-foreground font-display text-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-shadow">
-                    View
-                  </span>
-                </div>
               </div>
             </div>
           ))}
         </div>
       </div>
 
-      {/* Lightbox */}
+      {/* Lightbox Modal */}
       {selectedImage && (
         <div
-          className="fixed inset-0 z-50 bg-secondary/95 flex items-center justify-center p-4 animate-reveal"
-          onClick={() => setSelectedImage(null)}
+          className="
+            absolute inset-0 z-50 bg-black/80 
+            flex items-center justify-center p-4
+            animate-reveal
+          "
+          onClick={closeModal}
         >
           {/* Close Button */}
           <button
-            className="absolute top-4 right-4 text-secondary-foreground hover:text-primary transition-colors"
-            onClick={() => setSelectedImage(null)}
+            className="
+              absolute top-4 right-4 
+              text-white hover:text-primary 
+              transition-colors
+            "
+            onClick={closeModal}
             aria-label="Close"
           >
             <X size={32} />
           </button>
 
-          {/* Large Preview Image */}
+          {/* Full Image Preview */}
           <img
             src={cacheImageUrl(selectedImage)}
             alt="Gallery preview"
-            className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl"
+            className="
+              max-w-full max-h-[90vh] 
+              object-contain rounded-lg shadow-2xl
+              transition-transform duration-300 
+              hover:scale-105
+            "
             onClick={(e) => e.stopPropagation()}
           />
         </div>
