@@ -9,37 +9,12 @@ interface ContactProps {
 
 const Contact = ({ contact }: ContactProps) => {
   const containerRef = useScrollReveal();
-  const [formData, setFormData] = useState({
-    name: '',
-    phone: '',
-    date: '',
-    message: '',
-  });
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-    
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    
-    setIsLoading(false);
-    setIsSubmitted(true);
-    setFormData({ name: '', phone: '', date: '', message: '' });
-
-    // Reset success message after 5 seconds
-    setTimeout(() => setIsSubmitted(false), 5000);
-  };
 
   return (
     <section id="contact" className="py-20 bg-background" ref={containerRef}>
       <div className="container mx-auto px-4">
+        
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="section-title mb-4 animate-reveal">
@@ -51,14 +26,12 @@ const Contact = ({ contact }: ContactProps) => {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12 items-start">
-          {/* Contact Information */}
+
+          {/* Left: Info & Map */}
           <div className="animate-reveal-left">
-            {/* Contact Cards */}
+
             <div className="space-y-6 mb-8">
-              <a
-                href={`tel:${contact.phone}`}
-                className="flex items-center gap-4 p-4 bg-card rounded-lg shadow-md hover:shadow-lg transition-shadow group"
-              >
+              <a href={`tel:${contact.phone}`} className="flex items-center gap-4 p-4 bg-card rounded-lg shadow-md hover:shadow-lg transition-shadow group">
                 <div className="w-14 h-14 bg-primary rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
                   <Phone className="text-primary-foreground" size={24} />
                 </div>
@@ -68,10 +41,7 @@ const Contact = ({ contact }: ContactProps) => {
                 </div>
               </a>
 
-              <a
-                href={`mailto:${contact.email}`}
-                className="flex items-center gap-4 p-4 bg-card rounded-lg shadow-md hover:shadow-lg transition-shadow group"
-              >
+              <a href={`mailto:${contact.email}`} className="flex items-center gap-4 p-4 bg-card rounded-lg shadow-md hover:shadow-lg transition-shadow group">
                 <div className="w-14 h-14 bg-primary rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
                   <Mail className="text-primary-foreground" size={24} />
                 </div>
@@ -92,7 +62,7 @@ const Contact = ({ contact }: ContactProps) => {
               </div>
             </div>
 
-            {/* Google Map */}
+            {/* Map */}
             <div className="rounded-lg overflow-hidden shadow-lg h-64">
               <iframe
                 src={contact.map}
@@ -107,9 +77,10 @@ const Contact = ({ contact }: ContactProps) => {
             </div>
           </div>
 
-          {/* Appointment Form */}
+          {/* Right: Form */}
           <div className="animate-reveal-right">
             <div className="bg-card p-8 rounded-lg shadow-lg">
+
               <h3 className="font-display text-3xl text-secondary mb-6 tracking-wide">
                 Book an Appointment
               </h3>
@@ -121,84 +92,46 @@ const Contact = ({ contact }: ContactProps) => {
                     Appointment Submitted!
                   </p>
                   <p className="text-muted-foreground">
-                    We'll get back to you shortly to confirm your appointment.
+                    We will get back to you shortly.
                   </p>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-5">
+                <form
+                  action="https://formspree.io/f/xovgkpgq"  // << REPLACE THIS
+                  method="POST"
+                  onSubmit={() => setIsSubmitted(true)}
+                  className="space-y-5"
+                >
+                  <input type="hidden" name="_subject" value="New Appointment Request" />
+
                   <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
-                      Your Name
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                      className="input-field"
-                      placeholder="John Doe"
-                    />
+                    <label className="block text-sm font-medium text-foreground mb-2">Your Name</label>
+                    <input name="name" required className="input-field" placeholder="John Doe" />
                   </div>
 
                   <div>
-                    <label htmlFor="phone" className="block text-sm font-medium text-foreground mb-2">
-                      Phone Number
-                    </label>
-                    <input
-                      type="tel"
-                      id="phone"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      required
-                      className="input-field"
-                      placeholder="+1 (234) 567-8900"
-                    />
+                    <label className="block text-sm font-medium text-foreground mb-2">Phone Number</label>
+                    <input name="phone" required className="input-field" placeholder="+44 123 456 789" />
                   </div>
 
                   <div>
-                    <label htmlFor="date" className="block text-sm font-medium text-foreground mb-2">
-                      Preferred Date
-                    </label>
-                    <input
-                      type="date"
-                      id="date"
-                      name="date"
-                      value={formData.date}
-                      onChange={handleChange}
-                      required
-                      className="input-field"
-                    />
+                    <label className="block text-sm font-medium text-foreground mb-2">Preferred Date</label>
+                    <input type="date" name="date" required className="input-field" />
                   </div>
 
                   <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
-                      Message
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      rows={4}
-                      className="input-field resize-none"
-                      placeholder="Tell us about your vehicle and what you need..."
-                    />
+                    <label className="block text-sm font-medium text-foreground mb-2">Message</label>
+                    <textarea name="message" rows={4} className="input-field" placeholder="Describe the work needed..." />
                   </div>
 
-                  <button
-                    type="submit"
-                    disabled={isLoading}
-                    className="btn-primary w-full text-lg disabled:opacity-70 disabled:cursor-not-allowed"
-                  >
-                    {isLoading ? 'Submitting...' : 'Submit Appointment'}
+                  <button type="submit" className="btn-primary w-full text-lg">
+                    Submit Appointment
                   </button>
                 </form>
               )}
             </div>
           </div>
+
         </div>
       </div>
     </section>
