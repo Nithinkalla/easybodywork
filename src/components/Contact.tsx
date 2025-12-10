@@ -97,26 +97,29 @@ const Contact = ({ contact }: ContactProps) => {
                 </div>
               ) : (
 <form
-  action="https://formspree.io/f/xovgkpgq"
-  method="POST"
-  onSubmit={() => setIsSubmitted(true)}
+  onSubmit={(e) => {
+    e.preventDefault();
+
+    const name = (e.target as any).name.value;
+    const phone = (e.target as any).phone.value;
+    const date = (e.target as any).date.value;
+    const message = (e.target as any).message.value;
+
+    const subject = "Appointment Request";
+    const body = `Name: ${name}%0D%0APhone: ${phone}%0D%0ADate: ${date}%0D%0AMessage: ${message}`;
+
+    window.location.href = `mailto:admin@easybodyworkltd.co.uk?subject=${subject}&body=${body}`;
+  }}
   className="space-y-5"
 >
-  <input type="hidden" name="_subject" value="New Appointment Request" />
-
   <div>
     <label className="block text-sm font-medium text-foreground mb-2">Your Name</label>
     <input name="name" required className="input-field" placeholder="John Doe" />
   </div>
 
   <div>
-    <label className="block text-sm font-medium text-foreground mb-2">Your Email</label>
-    <input type="email" name="_replyto" required className="input-field" placeholder="you@email.com" />
-  </div>
-
-  <div>
     <label className="block text-sm font-medium text-foreground mb-2">Phone Number</label>
-    <input name="phone" required className="input-field" placeholder="+44 123 456 789" />
+    <input name="phone" required className="input-field" placeholder="+44 123 456" />
   </div>
 
   <div>
