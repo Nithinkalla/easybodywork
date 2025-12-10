@@ -82,7 +82,7 @@ const Contact = ({ contact }: ContactProps) => {
             <div className="bg-card p-8 rounded-lg shadow-lg">
 
               <h3 className="font-display text-3xl text-secondary mb-6 tracking-wide">
-                Book an Appointment
+                Book a Appointment
               </h3>
 
               {isSubmitted ? (
@@ -96,38 +96,43 @@ const Contact = ({ contact }: ContactProps) => {
                   </p>
                 </div>
               ) : (
-                <form
-                  action="https://formspree.io/f/xovgkpgq"  // << REPLACE THIS
-                  method="POST"
-                  onSubmit={() => setIsSubmitted(true)}
-                  className="space-y-5"
-                >
-                  <input type="hidden" name="_subject" value="New Appointment Request" />
+<form
+  action="https://formspree.io/f/xovgkpgq"
+  method="POST"
+  onSubmit={() => setIsSubmitted(true)}
+  className="space-y-5"
+>
+  <input type="hidden" name="_subject" value="New Appointment Request" />
 
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">Your Name</label>
-                    <input name="name" required className="input-field" placeholder="John Doe" />
-                  </div>
+  <div>
+    <label className="block text-sm font-medium text-foreground mb-2">Your Name</label>
+    <input name="name" required className="input-field" placeholder="John Doe" />
+  </div>
 
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">Phone Number</label>
-                    <input name="phone" required className="input-field" placeholder="+44 123 456 789" />
-                  </div>
+  <div>
+    <label className="block text-sm font-medium text-foreground mb-2">Your Email</label>
+    <input type="email" name="_replyto" required className="input-field" placeholder="you@email.com" />
+  </div>
 
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">Preferred Date</label>
-                    <input type="date" name="date" required className="input-field" />
-                  </div>
+  <div>
+    <label className="block text-sm font-medium text-foreground mb-2">Phone Number</label>
+    <input name="phone" required className="input-field" placeholder="+44 123 456 789" />
+  </div>
 
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">Message</label>
-                    <textarea name="message" rows={4} className="input-field" placeholder="Describe the work needed..." />
-                  </div>
+  <div>
+    <label className="block text-sm font-medium text-foreground mb-2">Preferred Date</label>
+    <input type="date" name="date" required className="input-field" />
+  </div>
 
-                  <button type="submit" className="btn-primary w-full text-lg">
-                    Submit Appointment
-                  </button>
-                </form>
+  <div>
+    <label className="block text-sm font-medium text-foreground mb-2">Message</label>
+    <textarea name="message" rows={4} className="input-field" placeholder="Describe the work needed..." />
+  </div>
+
+  <button type="submit" className="btn-primary w-full text-lg">
+    Submit Appointment
+  </button>
+</form>
               )}
             </div>
           </div>
