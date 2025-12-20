@@ -1,115 +1,120 @@
 import { useState } from 'react';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
-import { X } from 'lucide-react';
+import { X, Play } from 'lucide-react';
 import { cacheImageUrl } from '@/utils/cacheImageUrl';
 
 interface GalleryProps {
-  images: string[];
+  images: string[]; // images OR videos
 }
+
+const isVideo = (url: string) =>
+  url.includes('/video/') ||
+  url.endsWith('.mp4') ||
+  url.endsWith('.webm');
 
 const Gallery = ({ images }: GalleryProps) => {
   const containerRef = useScrollReveal();
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [selected, setSelected] = useState<string | null>(null);
 
-  const openModal = (img: string) => {
-    setSelectedImage(img);
-    document.body.style.overflow = 'hidden'; // freeze scroll visually
+  const openModal = (url: string) => {
+    setSelected(url);
+    document.body.style.overflow = 'hidden';
   };
 
   const closeModal = () => {
-    setSelectedImage(null);
-    document.body.style.overflow = 'auto'; // restore scroll
+    setSelected(null);
+    document.body.style.overflow = 'auto';
   };
 
   return (
     <section id="gallery" className="py-20 bg-muted" ref={containerRef}>
       <div className="container mx-auto px-4">
 
-        {/* Section Header */}
+        {/* Header */}
         <div className="text-center mb-16">
           <h2 className="section-title mb-4 animate-reveal">
             Our <span className="text-primary">Work</span>
           </h2>
           <p className="section-subtitle animate-reveal">
-            Browse through our portfolio of completed projects and see the quality of our craftsmanship.
+            Browse through our portfolio of completed projects.
           </p>
         </div>
 
-        {/* Gallery Grid */}
-        <div
-          className="
-            grid 
-            grid-cols-2 
-            sm:grid-cols-2 
-            md:grid-cols-3 
-            lg:grid-cols-4 
-            gap-3 
-            px-2
-          "
-        >
-          {images.map((image, index) => (
+        {/* Grid */}
+        <div className="
+          grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4
+          gap-3 px-2
+        ">
+          {images.map((item, index) => (
             <div
               key={index}
               className="animate-reveal cursor-pointer"
               style={{ transitionDelay: `${index * 0.05}s` }}
-              onClick={() => openModal(image)}
+              onClick={() => openModal(item)}
             >
-              <div
-                className="
-                  relative aspect-square overflow-hidden rounded-lg shadow-md
-                  group transition-transform duration-500 hover:scale-[1.05]
-                "
-              >
-                {/* Thumbnail Image */}
-                <img
-                  src={cacheImageUrl(image)}
-                  alt={`Gallery image ${index + 1}`}
-                  className="
-                    w-full h-full object-cover 
-                    transition-transform duration-500 group-hover:scale-110
-                  "
-                />
+              <div className="
+                relative aspect-square overflow-hidden rounded-lg shadow-md
+                group transition-transform duration-500 hover:scale-[1.05]
+              ">
+                {isVideo(item) ? (
+                  <>
+                    <video
+                      src={item}
+                      muted
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/30">
+                      <Play className="text-white w-10 h-10" />
+                    </div>
+                  </>
+                ) : (
+                  <img
+                    src={cacheImageUrl(item)}
+                    alt={`Gallery item ${index + 1}`}
+                    className="
+                      w-full h-full object-cover
+                      transition-transform duration-500 group-hover:scale-110
+                    "
+                  />
+                )}
               </div>
             </div>
           ))}
         </div>
       </div>
 
-      {/* Lightbox Modal */}
-      {selectedImage && (
+      {/* Modal */}
+      {selected && (
         <div
           className="
-            absolute inset-0 z-50 bg-black/80 
+            fixed inset-0 z-50 bg-black/80
             flex items-center justify-center p-4
             animate-reveal
           "
           onClick={closeModal}
         >
-          {/* Close Button */}
           <button
-            className="
-              absolute top-4 right-4 
-              text-white hover:text-primary 
-              transition-colors
-            "
+            className="absolute top-4 right-4 text-white hover:text-primary"
             onClick={closeModal}
-            aria-label="Close"
           >
             <X size={32} />
           </button>
 
-          {/* Full Image Preview */}
-          <img
-            src={cacheImageUrl(selectedImage)}
-            alt="Gallery preview"
-            className="
-              max-w-full max-h-[90vh] 
-              object-contain rounded-lg shadow-2xl
-              transition-transform duration-300 
-              hover:scale-105
-            "
-            onClick={(e) => e.stopPropagation()}
-          />
+          {isVideo(selected) ? (
+            <video
+              src={selected}
+              controls
+              autoPlay
+              className="max-w-full max-h-[90vh] rounded-lg shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            />
+          ) : (
+            <img
+              src={cacheImageUrl(selected)}
+              className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            />
+          )}
         </div>
       )}
     </section>
