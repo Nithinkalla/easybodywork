@@ -4,7 +4,7 @@ import { X, Play } from 'lucide-react';
 import { cacheImageUrl } from '@/utils/cacheImageUrl';
 
 interface GalleryProps {
-  images: string[]; // images OR videos
+  images: string[];
 }
 
 const isVideo = (url: string) =>
@@ -15,16 +15,6 @@ const isVideo = (url: string) =>
 const Gallery = ({ images }: GalleryProps) => {
   const containerRef = useScrollReveal();
   const [selected, setSelected] = useState<string | null>(null);
-
-  const openModal = (url: string) => {
-    setSelected(url);
-    document.body.style.overflow = 'hidden';
-  };
-
-  const closeModal = () => {
-    setSelected(null);
-    document.body.style.overflow = 'auto';
-  };
 
   return (
     <section id="gallery" className="py-20 bg-muted" ref={containerRef}>
@@ -50,7 +40,7 @@ const Gallery = ({ images }: GalleryProps) => {
               key={index}
               className="animate-reveal cursor-pointer"
               style={{ transitionDelay: `${index * 0.05}s` }}
-              onClick={() => openModal(item)}
+              onClick={() => setSelected(item)}
             >
               <div className="
                 relative aspect-square overflow-hidden rounded-lg shadow-md
@@ -58,9 +48,12 @@ const Gallery = ({ images }: GalleryProps) => {
               ">
                 {isVideo(item) ? (
                   <>
+                    {/* Video thumbnail */}
                     <video
                       src={item}
                       muted
+                      playsInline
+                      preload="metadata"
                       className="w-full h-full object-cover"
                     />
                     <div className="absolute inset-0 flex items-center justify-center bg-black/30">
@@ -83,19 +76,18 @@ const Gallery = ({ images }: GalleryProps) => {
         </div>
       </div>
 
-      {/* Modal */}
+      {/* MODAL (no body scroll hack) */}
       {selected && (
         <div
           className="
             fixed inset-0 z-50 bg-black/80
             flex items-center justify-center p-4
-            animate-reveal
           "
-          onClick={closeModal}
+          onClick={() => setSelected(null)}
         >
           <button
             className="absolute top-4 right-4 text-white hover:text-primary"
-            onClick={closeModal}
+            onClick={() => setSelected(null)}
           >
             <X size={32} />
           </button>
@@ -105,6 +97,7 @@ const Gallery = ({ images }: GalleryProps) => {
               src={selected}
               controls
               autoPlay
+              playsInline
               className="max-w-full max-h-[90vh] rounded-lg shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             />
